@@ -1,0 +1,62 @@
+@import "reset";
+
+@mixin user-select {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    position: relative;
+    height: 100dvh;
+    width: 100dvw;
+    overflow: hidden;
+}
+
+.title {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 24px;
+    color: #377ade;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #2b1523;
+}
+
+.pose-img-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    // background-color: rgb(236, 47, 47);
+}
+
+.img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    overflow: hidden;
+    @include user-select();
+}
+
+#scratch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    //
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    //
+    @include user-select();
+}
