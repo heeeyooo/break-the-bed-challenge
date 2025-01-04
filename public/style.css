@@ -204,6 +204,7 @@ body {
   z-index: 1;
   width: 100px;
   opacity: 0;
+  pointer-events: none;
 }
 
 .hand-tip--animation {

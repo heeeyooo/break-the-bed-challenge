@@ -1,3 +1,6 @@
+// Allows hower on touch devices
+addEventListener("touchstart", () => {}, true);
+
 let canvas = document.getElementById("scratch");
 let context = canvas.getContext("2d");
 
