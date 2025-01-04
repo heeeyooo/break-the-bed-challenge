@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 /* Reset and base styles  */
 * {
   padding: 0px;
@@ -106,50 +107,122 @@ legend {
   display: block;
 }
 
+.none {
+  display: none !important;
+}
+
 body {
-  position: relative;
+  font-family: "Montserrat", serif;
   height: 100dvh;
-  width: 100dvw;
   overflow: hidden;
+  text-align: center;
+}
+
+.menu {
+  height: 100dvh;
+  background-color: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 }
 
 .title {
-  position: absolute;
-  top: 100px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 24px;
-  color: #377ade;
+  color: #fff;
+  font-size: clamp(24px, 6vw, 50px);
+  font-weight: 500;
+}
+.title span {
+  color: #000;
+  background-color: #ffb630;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.container {
-  height: 100%;
-  width: 100%;
+.btn-basic, .refresh-btn, .reject-btn, .allowed-btn, .play-btn {
+  border: 1px solid #ffb630;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 200ms;
+}
+
+.play-btn {
+  color: #fff;
+}
+.play-btn:hover {
+  background-color: #ffb630;
+  color: #000;
+}
+
+.attention {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: #2b1523;
+  align-items: flex-end;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-bottom: 100px;
 }
 
-.pose-img-container {
+.allowed-btn {
+  background-color: #ffb630;
+  color: #000;
+  margin-right: 5px;
+}
+.allowed-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.reject-btn {
+  color: white;
+  margin-left: 5px;
+}
+.reject-btn:hover {
+  background-color: #ffb630;
+  color: #000;
+}
+
+.game {
+  height: 100dvh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.game__title {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 500;
+  padding: 0 10px;
+}
+
+.img-canvas-container {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #fff;
 }
 
 .img {
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
   pointer-events: none;
-  overflow: hidden;
+  -webkit-user-select: none;
   -moz-user-select: none;
        user-select: none;
-  -webkit-user-select: none;
 }
 
 #scratch {
@@ -158,9 +231,22 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
+  border-radius: 50%;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  -webkit-user-select: none;
   -moz-user-select: none;
        user-select: none;
-  -webkit-user-select: none;
+  cursor: grab;
+}
+#scratch:active {
+  cursor: grabbing;
+}
+
+.refresh-btn {
+  color: #fff;
+}
+.refresh-btn:hover {
+  background-color: #ffb630;
+  color: #000;
 }/*# sourceMappingURL=style.css.map */

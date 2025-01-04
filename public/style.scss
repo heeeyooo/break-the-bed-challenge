@@ -1,50 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "reset";
 
 @mixin user-select {
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
+}
+
+@mixin glass-effect {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+$custom-orange: #ffb630;
+
+.none {
+    display: none !important;
 }
 
 body {
-    position: relative;
+    font-family: "Montserrat", serif;
     height: 100dvh;
-    width: 100dvw;
     overflow: hidden;
+    text-align: center;
+}
+
+.menu {
+    height: 100dvh;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
 }
 
 .title {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 24px;
-    color: #377ade;
+    color: #fff;
+    font-size: clamp(24px, 6vw, 50px);
+    font-weight: 500;
+    span {
+        color: #000;
+        background-color: $custom-orange;
+        padding: 5px;
+        border-radius: 5px;
+    }
 }
 
-.container {
-    height: 100%;
-    width: 100%;
+.btn-basic {
+    border: 1px solid $custom-orange;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 200ms;
+}
+
+.play-btn {
+    color: #fff;
+    @extend .btn-basic;
+    &:hover {
+        background-color: $custom-orange;
+        color: #000;
+    }
+}
+
+.attention {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: #2b1523;
+    align-items: flex-end;
+    @include glass-effect();
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-bottom: 100px;
 }
 
-.pose-img-container {
+.allowed-btn {
+    background-color: $custom-orange;
+    color: #000;
+    margin-right: 5px;
+    @extend .btn-basic;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.reject-btn {
+    color: white;
+    margin-left: 5px;
+    @extend .btn-basic;
+    &:hover {
+        background-color: $custom-orange;
+        color: #000;
+    }
+}
+
+.game {
+    height: 100dvh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.game__title {
+    font-size: 24px;
+    color: #fff;
+    font-weight: 500;
+    padding: 0 10px;
+}
+
+.img-canvas-container {
     position: relative;
-    width: 200px;
-    height: 200px;
-    // background-color: rgb(236, 47, 47);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #fff;
 }
 
 .img {
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    object-fit: contain;
+    border-radius: 50%;
     pointer-events: none;
-    overflow: hidden;
     @include user-select();
 }
 
@@ -54,9 +137,21 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    //
+    border-radius: 50%;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
-    //
     @include user-select();
+    cursor: grab;
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.refresh-btn {
+    color: #fff;
+    @extend .btn-basic;
+    &:hover {
+        background-color: $custom-orange;
+        color: #000;
+    }
 }

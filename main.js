@@ -1,26 +1,50 @@
 let canvas = document.getElementById("scratch");
-// create context to be able to draw in canvas
 let context = canvas.getContext("2d");
 
-// create gradient
-const init = () => {
-    let gradient = context.createLinearGradient(0, 0, 135, 135);
-    gradient.addColorStop(0, "#37dede");
-    gradient.addColorStop(1, "#377ade");
+document.querySelector(".js-play-btn").addEventListener("click", () => {
+    isAllowed();
+});
 
-    // draw a filled rectangle with gradient
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, 200, 200);
-};
+function isAllowed() {
+    document.querySelector(".menu").classList.add("none");
+    document.querySelector(".game").classList.remove("none");
+    init();
+    const attention = document.createElement("div");
+    const allowedBtn = document.createElement("button");
+    const rejectBtn = document.createElement("button");
 
-window.onload = init();
+    attention.classList = "attention";
+    allowedBtn.classList = "allowed-btn";
+    rejectBtn.classList = "reject-btn";
 
-// initialize mouse position
+    allowedBtn.textContent = "I am 18 or older";
+    rejectBtn.textContent = "I am under 18";
 
-let mouseX = 0;
-let mouseY = 0;
-let isScratched = false;
+    document.body.append(attention);
+    attention.append(allowedBtn);
+    attention.append(rejectBtn);
 
+    allowedBtn.addEventListener("click", () => {
+        attention.remove();
+        // get current coordinates rectLeft and rectTop
+        getCoordinates();
+    });
+
+    rejectBtn.addEventListener("click", () => {
+        window.close();
+    });
+}
+
+function init() {
+    // Draw a filled rectangle with backgroundColor
+    context.fillStyle = "#ffb630";
+    context.fillRect(0, 0, 300, 300);
+
+    // Shuffle random img every time on init
+    updateImg();
+}
+
+// Mouse or touch event
 let events = {
     mouse: {
         down: "mousedown",
@@ -34,12 +58,12 @@ let events = {
     },
 };
 
-let deviceType = "";
+let deviceType;
 
-// detech touch device
+// Create function that detecting touch device or not
 const isTouchDevice = () => {
     try {
-        // we try to create TouchEvent. It would fail for desktops and throw error
+        // I try to create TouchEvent. It would fail for desktops and throw an error
         document.createEvent("TouchEvent");
         deviceType = "touch";
         return true;
@@ -49,42 +73,54 @@ const isTouchDevice = () => {
     }
 };
 
-// get top and left of canvas
-let rectLeft = canvas.getBoundingClientRect().left;
-let rectTop = canvas.getBoundingClientRect().top;
+// Returns true or false
+isTouchDevice();
 
-// exact x and y position of mouse\touch
-// PAGEX PAGEY ARE COORDINATES FOR MOUSE WHEN CLICK
+// Define canvas coordinates
+let rectLeft;
+let rectTop;
+
+function getCoordinates() {
+    // Get top and left of canvas coordinates
+    rectLeft = canvas.getBoundingClientRect().left;
+    rectTop = canvas.getBoundingClientRect().top;
+}
+
+// Update canvas coordinates on resize
+addEventListener("resize", () => {
+    rectLeft = canvas.getBoundingClientRect().left;
+    rectTop = canvas.getBoundingClientRect().top;
+});
+
+// Define mouse or touch coordinates
+let mouseX;
+let mouseY;
+
 const getXY = (e) => {
     mouseX = (!isTouchDevice() ? e.pageX : e.touches[0].pageX) - rectLeft;
     mouseY = (!isTouchDevice() ? e.pageY : e.touches[0].pageY) - rectTop;
 };
 
-// returns true or false
-isTouchDevice();
+let isScratched = false;
 
 // Start scratch
-
-// devicetype can be mouse or touch
 canvas.addEventListener(events[deviceType].down, (event) => {
     isScratched = true;
-    // get x and y position
     getXY(event);
     scratch(mouseX, mouseY);
 });
 
 canvas.addEventListener(events[deviceType].move, (event) => {
-    if (!isTouchDevice()) {
-        event.preventDefault();
-    }
+    // if (!isTouchDevice()) {
+    //     event.preventDefault();
+    // }
     if (isScratched) {
         getXY(event);
         scratch(mouseX, mouseY);
     }
 });
 
-// stop drawing
-
+// Stop scratch
 canvas.addEventListener(events[deviceType].up, () => {
     isScratched = false;
 });
@@ -93,17 +129,16 @@ canvas.addEventListener("mouseleave", () => {
     isScratched = false;
 });
 
-const scratch = (x, y) => {
+function scratch(x, y) {
     context.globalCompositeOperation = "destination-out";
     context.beginPath();
 
-    // arc makes circle x,y,radius, start angle, end angle
-    context.arc(x, y, 20, 0, 2 * Math.PI);
+    // arc makes circle x, y, radius, start angle, end angle
+    context.arc(x, y, 25, 0, 2 * Math.PI);
     context.fill();
-};
+}
 
 // 34 poses
-
 const POSEDATA = [
     {
         pose: "img/3-Lotus.gif",
@@ -209,10 +244,17 @@ const POSEDATA = [
     },
 ];
 
-let randomNumber = Math.floor(Math.random() * 34);
-
 let img = document.querySelector(".img");
 
-img.src = `${POSEDATA[randomNumber].pose}`;
+// Random number of all images
+let randomNumber = Math.floor(Math.random() * 34);
 
-console.log(POSEDATA[randomNumber].pose);
+function updateImg() {
+    randomNumber = Math.floor(Math.random() * 34);
+    img.src = `${POSEDATA[randomNumber].pose}`;
+}
+
+document.querySelector(".js-refresh-btn").addEventListener("click", () => {
+    context.reset();
+    init();
+});

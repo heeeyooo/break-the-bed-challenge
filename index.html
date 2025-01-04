@@ -4,19 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break The Bed Challenge</title>
+    <title>Bed Adventures</title>
     <link rel="stylesheet" href="./public/style.css">
 </head>
 
 <body>
-    <p class="title">Scratch the field with your finger</p>
-
-    <div class="container">
-        <div class="pose-img-container">
+    <div class="menu">
+        <h1 class="title">Bed <span>Adventures</span></h1>
+        <button class="play-btn js-play-btn">Play</button>
+    </div>
+    <div class="game none">
+        <p class="game__title">Scratch the field with your finger</p>
+        <div class="img-canvas-container">
             <img class="img" src="" alt="">
-            <!-- canvas works when width and height are here -->
-            <canvas id="scratch" width="200" height="200"></canvas>
+            <!-- canvas works correctly when width and height are here -->
+            <canvas id="scratch" width="300" height="300"></canvas>
         </div>
+        <button class="refresh-btn js-refresh-btn">Refresh</button>
     </div>
     <script src="main.js"></script>
 </body>
