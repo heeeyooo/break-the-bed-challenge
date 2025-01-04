@@ -28,6 +28,9 @@ function isAllowed() {
         attention.remove();
         // get current coordinates rectLeft and rectTop
         getCoordinates();
+        document
+            .querySelector(".hand-tip")
+            .classList.add("hand-tip--animation");
     });
 
     rejectBtn.addEventListener("click", () => {
@@ -257,4 +260,10 @@ function updateImg() {
 document.querySelector(".js-refresh-btn").addEventListener("click", () => {
     context.reset();
     init();
+    document.querySelector(".hand-tip").classList.remove("hand-tip--animation");
+    setTimeout(() => {
+        document
+            .querySelector(".hand-tip")
+            .classList.add("hand-tip--animation");
+    }, 0);
 });

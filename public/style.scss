@@ -108,6 +108,35 @@ body {
     background-color: #000;
 }
 
+.hand-tip {
+    position: fixed;
+    z-index: 1;
+    width: 100px;
+    opacity: 0;
+}
+
+.hand-tip--animation {
+    animation: moveHand 3s 0.5s forwards linear;
+}
+
+@keyframes moveHand {
+    25% {
+        opacity: 1;
+        transform: translateX(50px);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    75% {
+        opacity: 1;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
 .game__title {
     font-size: 24px;
     color: #fff;
