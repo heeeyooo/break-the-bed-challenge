@@ -15,25 +15,56 @@ function isAllowed() {
     const attention = document.createElement("div");
     const allowedBtn = document.createElement("button");
     const rejectBtn = document.createElement("button");
+    const div = document.createElement("div");
+    const inputPass = document.createElement("input");
 
     attention.classList = "attention";
     allowedBtn.classList = "allowed-btn";
     rejectBtn.classList = "reject-btn";
+    div.classList = "btn-container";
+
+    const customLabel = document.createElement("label");
+
+    customLabel.innerHTML = "Enter the secret code to play this game";
+
+    customLabel.classList = "custom-label";
+
+    inputPass.classList = "input-password";
 
     allowedBtn.textContent = "I am 18 or older";
     rejectBtn.textContent = "I am under 18";
 
     document.body.append(attention);
-    attention.append(allowedBtn);
-    attention.append(rejectBtn);
+    div.append(allowedBtn, rejectBtn);
+    // attention.append(allowedBtn);
+    // attention.append(rejectBtn);
+    attention.append(div);
+    customLabel.append(inputPass);
+    attention.append(customLabel);
 
     allowedBtn.addEventListener("click", () => {
-        attention.remove();
-        // get current coordinates rectLeft and rectTop
-        getCoordinates();
-        document
-            .querySelector(".hand-tip")
-            .classList.add("hand-tip--animation");
+        try {
+            if (inputPass.value === "020904") {
+                attention.remove();
+                // get current coordinates rectLeft and rectTop
+                getCoordinates();
+                document
+                    .querySelector(".hand-tip")
+                    .classList.add("hand-tip--animation");
+            }
+            if (!inputPass.value) throw "Enter the secret code";
+            if (inputPass.value != "020904")
+                throw "Enter the correct secret code";
+        } catch (error) {
+            const allert = document.createElement("p");
+            allert.classList = "allert";
+            allert.innerHTML = error;
+            document.body.append(allert);
+
+            setTimeout(() => {
+                allert.remove();
+            }, 3000);
+        }
     });
 
     rejectBtn.addEventListener("click", () => {

@@ -70,31 +70,77 @@ body {
     bottom: 0;
     left: 0;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column-reverse;
     @include glass-effect();
     background-color: rgba(0, 0, 0, 0.5);
     padding-bottom: 100px;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+
 .allowed-btn {
     background-color: $custom-orange;
     color: #000;
-    margin-right: 5px;
     @extend .btn-basic;
     &:hover {
-        background-color: #000;
+        background-color: transparent;
         color: #fff;
     }
 }
 
 .reject-btn {
     color: white;
-    margin-left: 5px;
     @extend .btn-basic;
     &:hover {
         background-color: $custom-orange;
         color: #000;
+    }
+}
+
+.custom-label {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.input-password {
+    text-align: center;
+    color: white;
+    border: 1px solid $custom-orange;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 10px;
+}
+
+.allert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+    padding: 10px;
+    display: grid;
+    place-content: center;
+    background: rgb(255, 0, 0);
+    color: white;
+    opacity: 0;
+    animation: revealAllert 3s forwards;
+}
+
+@keyframes revealAllert {
+    50% {
+        opacity: 1;
     }
 }
 
